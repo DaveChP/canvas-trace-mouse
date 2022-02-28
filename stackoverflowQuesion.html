@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+<html lang='en'>
+<meta charset='utf-8'>
+<title>mouse drag on canvas events</title>
+</head>
+
+<!-- prepared in answer to question: https://stackoverflow.com/questions/71296735/how-to-paint-in-canvas-holding-the-mouse-and-not-clicking/71297746#71297746 -->
+
+<body>
+
+<canvas id="gameCanvas" width="300" height="150" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+
+<script>
+
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+
+let mouseDown = false;
+let mouseUp = true;
+
+canvas.addEventListener('mousedown', (event) => {
+  mouseDown = !mouseDown; // toggle mouseDown true/false; 
+});
+
+canvas.addEventListener('mousemove', (event) => {
+  if (mouseDown) {
+  redraw(event.clientX, event.clientY);
+  }
+});
+
+canvas.addEventListener('mouseup', (event) => {
+  mouseDown = !mouseDown; // toggle mouseDown true/false;
+});
+
+
+function redraw(X,Y) {
+  ctx.beginPath();
+  ctx.arc(X, Y, 2, 0, 2 * Math.PI, false);
+  ctx.stroke();  
+}
+
+</script>
+</body>
+</html>
